@@ -171,7 +171,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.frame = frame;
         self.backgroundColor = [UIColor clearColor];
         self.characterWidth = 8.f;
         self.font = [UIFont systemFontOfSize: 12.];
@@ -257,27 +256,9 @@
 
 - (void)updateSELFFrame{
     
-    if ([_characterViewsArray count] == 0)
-    {
-        return;
-    }
-    
     CGRect newViewFrame = self.frame;
     newViewFrame.size.width = [self.characterViewsArray count] * self.characterWidth;
-    if (_textAligment == UITextAlignmentLeft)
-    {
-        newViewFrame.origin.x = 0;
-    }
-    else if (_textAligment == UITextAlignmentCenter)
-    {
-        newViewFrame.origin.x = (self.frame.size.width - newViewFrame.size.width) / 2;
-    }
-    else if (_textAligment == UITextAlignmentRight)
-    {
-        newViewFrame.origin.x += self.frame.size.width - newViewFrame.size.width;
-    }
-    
-    newViewFrame.size.width = self.frame.size.width;
+    newViewFrame.origin.x += self.frame.size.width - newViewFrame.size.width;
     self.frame = newViewFrame;
 }
 
@@ -412,11 +393,6 @@
         
         [self updateUIFrames];
     }
-}
-
-- (void)setTextAligment:(UITextAlignment)textAligment
-{
-    _textAligment = textAligment;
 }
 
 - (void)setText:(NSString *)text{
